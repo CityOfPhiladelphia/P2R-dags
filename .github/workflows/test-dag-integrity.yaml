@@ -43,5 +43,5 @@ jobs:
             -e AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=sqlite:////tmp/airflow.db \
             -e PYTHONPATH=/opt/airflow/dags/repo \
             -e ENVIRONMENT=ci \
-            ${{ steps.deployed-airflow-image.outputs.REPO }}@${{ steps.deployed-airflow-image.outputs.TAG }} \
+            ${{ steps.deployed-airflow-image.outputs.REPO }}:${{ steps.deployed-airflow-image.outputs.TAG }} \
             bash -c "pytest /opt/airflow/dags/repo/tests/test_dag_integrity.py -s"
