@@ -17,9 +17,9 @@ import random
 @dag(
     tags=["example"],
     # This sends an email when this dag fails only on prod
-    on_failure_callback=lib.helpers.dag_email(to="Ryan.Weast@phila.gov"),
-    # To send an email no matter what, just do
-    # on_failure_callback=lib.helpers.dag_email(to="Ryan.Weast@phila.gov", dev=True)
+    # on_failure_callback=lib.helpers.dag_email(to="Ryan.Weast@phila.gov"),
+    # To send an email on prod or dev, just do
+    on_failure_callback=lib.helpers.dag_email(to="Ryan.Weast@phila.gov", dev=True),
     # Or to send an email just on dev
     # on_failure_callback=lib.helpers.dag_email(to="Ryan.Weast@phila.gov", prod=False, dev=True)
     #

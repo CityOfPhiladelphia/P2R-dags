@@ -1,0 +1,47 @@
+name: Test Dag Integrity
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  # Pulls our custom docker image from ECR, mounts the github repo
+  # onto it as dags, then verifies dag integrity to ensure the dags
+  # won't cause an import error.
+  test-dags:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get currently deployed Airflow image
+        id: deployed-airflow-image
+        run: |
+          echo "REPO=880708401960.dkr.ecr.us-east-1.amazonaws.com/citygeo-docker-builds/revenue-airflow">>$GITHUB_OUTPUT
+          echo "TAG=latest">>$GITHUB_OUTPUT
+
+      - name: Checkout this repo
+        uses: actions/checkout@v7
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v6
+        with:
+          aws-region: us-east-1
+          aws-access-key-id: ${{ secrets.ECR_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.ECR_AWS_SECRET_ACCESS_KEY }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      # 4. Run the dag test
+      - name: Run DAG Integrity Test
+        run: |
+          docker run --rm -v ${{ github.workspace }}:/opt/airflow/dags/repo \
+            -e AIRFLOW__CORE__UNIT_TEST_MODE=True \
+            -e AIRFLOW__CORE__LOAD_EXAMPLES=False \
+            -e AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=sqlite:////tmp/airflow.db \
+            -e PYTHONPATH=/opt/airflow/dags/repo \
+            -e ENVIRONMENT=ci \
+            ${{ steps.deployed-airflow-image.outputs.REPO }}@${{ steps.deployed-airflow-image.outputs.TAG }} \
+            bash -c "pytest /opt/airflow/dags/repo/tests/test_dag_integrity.py -s"
