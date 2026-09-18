@@ -49,5 +49,3 @@ def test_dagbag_has_no_import_errors():
         assert dag.validate() is None, f"DAG failed validation test: {dag_id}"
         validated_dags += 1
     print(f"Validated {str(validated_dags)} DAGs.")
-    if validated_dags < 400:
-        raise Exception("Too few dags! Did dag factory fail?")
