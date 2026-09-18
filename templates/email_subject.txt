@@ -1,0 +1,1 @@
+{% if dag_run.state == 'success' %}🎉 Dag Success{% else %}🚨 Dag Fail{% endif %}: {{ ti.dag_id }}
