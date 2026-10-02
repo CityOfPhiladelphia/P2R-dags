@@ -59,7 +59,8 @@ def python_venv_example():
     # has installed, which allows you to retrieve connections
     @task.virtualenv(
         requirements=[
-            f"polars==1.38.1, apache-airflow-task-sdk=={importlib.metadata.version('apache-airflow-task-sdk')}"
+            "polars==1.38.1",
+            f"apache-airflow-task-sdk=={importlib.metadata.version('apache-airflow-task-sdk')}",
         ],
         system_site_packages=False,
         # Every venv_cache_path must start with "~/venvs/", as this is the path
