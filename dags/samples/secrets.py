@@ -13,7 +13,7 @@ def secrets_example():
     def secrets_example():
         # Always retrieve secrets inside of tasks!
         # Do not retrieve them at the dag level
-        test_secret = BaseHook.get_connection("my_conn_id")
+        test_secret = BaseHook.get_connection("TestConnection")
         logging.info(f"Test secret username: {test_secret.login}")
         logging.info(f"Test secret password (auto-masked): {test_secret.password}")
 
@@ -22,7 +22,7 @@ def secrets_example():
         # If two tasks use the same secret, you should retrieve the
         # secret individually in each task, do not pass secrets
         # between tasks or place them in XCOM
-        test_secret = BaseHook.get_connection("my_conn_id")
+        test_secret = BaseHook.get_connection("TestConnection")
         logging.info(f"Test secret username: {test_secret.login}")
         logging.info(f"Test secret password (auto-masked): {test_secret.password}")
 
