@@ -7,7 +7,6 @@ import lib.helpers
     schedule=lib.helpers.schedule(
         "30 2 * * *", dev=True, prod=False
     ),  # Run daily at 2:30am, only on dev
-    catchup=False,
 )
 def hello_world_example():
     # Default task is a Python task which just executes Python
