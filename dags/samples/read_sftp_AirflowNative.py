@@ -11,7 +11,7 @@ import lib.helpers
 @dag(
     tags=["example"]
 )
-def check_sftp_read():
+def check_sftp_example():
     # Default task is a Python task which just executes Python
     @task
     def check_sftp_read(
@@ -29,4 +29,6 @@ def check_sftp_read():
         print("File read successfully!")
         print(df.head(5))
 
-check_sftp_read()
+    check_sftp_read()
+
+check_sftp_example()
