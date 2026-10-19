@@ -29,6 +29,6 @@ def check_sftp_example():
         print("File read successfully!")
         print(df.head(5))
 
-    check_sftp_read()
+    check_sftp_read("SFTP_test")
 
 check_sftp_example()
