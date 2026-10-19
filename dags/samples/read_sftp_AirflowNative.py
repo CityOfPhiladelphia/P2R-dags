@@ -10,7 +10,6 @@ import lib.helpers
 
 @dag(
     tags=["example"]
-    ),  # Run daily at 2:30am, only on dev
 )
 def check_sftp_read():
     # Default task is a Python task which just executes Python
