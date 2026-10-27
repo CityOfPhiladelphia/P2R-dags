@@ -17,14 +17,16 @@ def check_sftp_example():
     def check_sftp_read(
         SFTP_test
     ):
-        # 1. Download file from SFTP (in-memory)
-        sftp = SFTPHook(ftp_conn_id=SFTP_test)
+        # 1. Download file from SFTP
+        sftp = SFTPHook(ssh_conn_id=SFTP_test)
         file_bytes = BytesIO()
-    
-        sftp.retrieve_file('/PRISM_Test/opa_properties_public.csv', file_bytes)
+        remote_path = '/#/PRISM_Test/opa_properties_public.csv'
+        print("Connecting to ", BaseHook.get_connection(conn_id).host, remote_path)
+        sftp.retrieve_file(remote_path, file_bytes)
         file_bytes.seek(0)
-    
-        # 2. Read file (CSV example)
+
+              
+        # 2. Read file
         df = pd.read_csv(file_bytes)
         print("File read successfully!")
         print(df.head(5))
