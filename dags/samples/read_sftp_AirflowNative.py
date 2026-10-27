@@ -3,6 +3,7 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 import pandas as pd
 from airflow.providers.sftp.hooks.sftp import SFTPHook
+from airflow.hooks.base import BaseHook
 from io import BytesIO
 from airflow.sdk import dag, task
 import lib.helpers
