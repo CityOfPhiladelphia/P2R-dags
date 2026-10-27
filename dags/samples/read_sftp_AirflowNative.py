@@ -15,14 +15,12 @@ import lib.helpers
 def check_sftp_example():
     # Default task is a Python task which just executes Python
     @task
-    def check_sftp_read(
-        SFTP_test
-    ):
+    def check_sftp_read():
         # 1. Download file from SFTP
-        sftp = SFTPHook(ssh_conn_id=SFTP_test)
+        sftp = SFTPHook(ssh_conn_id="SFTP_test")
         file_bytes = BytesIO()
         remote_path = '/PRISM_Test/opa_properties_public.csv'
-        print("Connecting to ", BaseHook.get_connection(SFTP_test).host, remote_path)
+        print("Connecting to ", BaseHook.get_connection("SFTP_test").host, remote_path)
         sftp.retrieve_file(remote_path, file_bytes)
         file_bytes.seek(0)
 
@@ -32,6 +30,6 @@ def check_sftp_example():
         print("File read successfully!")
         print(df.head(5))
 
-    check_sftp_read("SFTP_test")
+    check_sftp_read()
 
 check_sftp_example()
