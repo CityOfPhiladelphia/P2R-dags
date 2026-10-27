@@ -22,7 +22,7 @@ def check_sftp_example():
         sftp = SFTPHook(ssh_conn_id=SFTP_test)
         file_bytes = BytesIO()
         remote_path = '/#/PRISM_Test/opa_properties_public.csv'
-        print("Connecting to ", BaseHook.get_connection(conn_id).host, remote_path)
+        print("Connecting to ", BaseHook.get_connection(SFTP_test).host, remote_path)
         sftp.retrieve_file(remote_path, file_bytes)
         file_bytes.seek(0)
 
