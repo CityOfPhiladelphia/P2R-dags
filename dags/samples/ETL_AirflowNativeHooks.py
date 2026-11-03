@@ -12,7 +12,7 @@ import lib.helpers
 @dag(
     tags=["example"]
 )
-def check_sftp_example():
+def ETL_AirflowNativeHooks():
     # Default task is a Python task which just executes Python
     @task
     def check_sftp_read():
