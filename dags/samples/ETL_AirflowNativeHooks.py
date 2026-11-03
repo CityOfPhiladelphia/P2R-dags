@@ -32,4 +32,4 @@ def ETL_AirflowNativeHooks():
 
     check_sftp_read()
 
-check_sftp_example()
+ETL_AirflowNativeHooks()
