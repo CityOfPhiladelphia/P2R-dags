@@ -13,7 +13,7 @@ import lib.helpers
 @dag(
     tags=["example"]
 )
-def ETL_AirflowNativeHooks_XCom():
+def ETL_AirflowNativeHooks_XCom() -> str:
     # Default task is a Python task which just executes Python
     @task
     def extract():
