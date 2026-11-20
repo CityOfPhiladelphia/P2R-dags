@@ -28,7 +28,7 @@ def ETL_AirflowNativeHooks_XCom():
 
     def transform(raw_data: str):
         # Read file
-        buffer = io.stringIO(raw_data)
+        buffer = io.StringIO(raw_data)
         df = pd.read_csv(buffer)
         print("File read successfully!")
         print(df.head(5))
