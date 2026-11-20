@@ -13,10 +13,10 @@ import lib.helpers
 @dag(
     tags=["example"]
 )
-def ETL_AirflowNativeHooks_XCom() -> str:
+def ETL_AirflowNativeHooks_XCom():
     # Default task is a Python task which just executes Python
     @task
-    def extract():
+    def extract() -> str:
         # Download file from SFTP
         sftp = SFTPHook(ssh_conn_id="SFTP_test")
         file_bytes = BytesIO()
