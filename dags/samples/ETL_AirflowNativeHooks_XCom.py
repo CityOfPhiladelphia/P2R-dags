@@ -26,6 +26,7 @@ def ETL_AirflowNativeHooks_XCom():
         file_bytes.seek(0)
         return base64.b64encode(file_bytes.getvalue()).decode('utf-8')
 
+    @task
     def transform(b64_data: str):
         # Read file
         buffer = base64.b64decode(b64_data)
