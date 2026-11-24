@@ -20,7 +20,7 @@ def ETL_AirflowNativeHooks_XCom():
         # Download file from SFTP
         sftp = SFTPHook(ssh_conn_id="SFTP_test")
         file_bytes = BytesIO()
-        remote_path = '/PRISM_Test/opa_properties_public.csv'
+        remote_path = '/PRISM_Test/opa_properties_public_test.csv'
         print("Connecting to ", BaseHook.get_connection("SFTP_test").host, remote_path)
         sftp.retrieve_file(remote_path, file_bytes)
         file_bytes.seek(0)
